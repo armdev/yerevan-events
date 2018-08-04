@@ -1,0 +1,42 @@
+version: '3'
+services: 
+  mysql:
+    image: mysql
+    build: ./mysql
+    container_name: "mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=yerevan
+    ports:
+      - 3306:3306  
+    networks:
+     - yerenet
+ 
+  yerevan:
+    image: yerevan
+    build: ./yerevan
+    container_name: yerevan
+    env_file: .env
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    links:
+      - mysql     
+    depends_on:      
+      - mysql     
+    ports:
+      - '2025:2025'
+    volumes:
+      - /opt/yere/logs/:/opt/yere/logs
+    networks:
+      - yerenet  
+
+  
+networks:
+  yerenet:
+    driver: overlay
