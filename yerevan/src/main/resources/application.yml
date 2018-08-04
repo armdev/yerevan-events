@@ -15,6 +15,6 @@ spring:
         dialect:  org.hibernate.dialect.MySQLDialect        
   datasource:
         url: ${MYSQL_URI:jdbc:mysql://127.0.0.1:3306/yerevan?zeroDateTimeBehavior=convertToNull&amp;useUnicode=yes&amp;characterEncoding=UTF-8)
-        username: ${MYSQL_USER:root)
-        password:  ${MYSQL_PASS:root)
+        username: ${MYSQL_USER:carlos)
+        password:  ${MYSQL_PASS:carlos)
         driver-class-name: com.mysql.jdbc.Driver    
